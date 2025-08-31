@@ -5,20 +5,26 @@
 
 // Función para leer el valor del LDR
 void leerLDR() {
-  // Leer valor analógico (0 - 1023)
   valorLDR = analogRead(pinLDR);
-
-  // Convertir a voltaje (usando referencia de 5V)
   voltajeLDR = (valorLDR * 5.0) / 1023.0;
 }
 
-// Función para mostrar en el Monitor Serial
+// Función para mostrar valores en Serial
 void mostrarLDR() {
   Serial.print("Valor ADC: ");
   Serial.print(valorLDR);
   Serial.print("  Voltaje: ");
   Serial.print(voltajeLDR);
   Serial.println(" V");
+}
+
+// Función para controlar el LED según la luz detectada
+void controlarLED() {
+  if (valorLDR < UMBRAL_LUZ) {
+    digitalWrite(pinLED, HIGH); // Encender LED (hay poca luz)
+  } else {
+    digitalWrite(pinLED, LOW);  // Apagar LED (hay suficiente luz)
+  }
 }
 
 #endif
