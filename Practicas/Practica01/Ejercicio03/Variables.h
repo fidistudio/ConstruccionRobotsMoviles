@@ -12,6 +12,6 @@ int valorLDR = 0;
 float voltajeLDR = 0.0;
 
 // Umbral para prender el LED (ajustable según pruebas)
-const int UMBRAL_LUZ = 400;
+const int UMBRAL_LUZ = 500;
 
 #endif
