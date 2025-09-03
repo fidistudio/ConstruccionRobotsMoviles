@@ -12,11 +12,11 @@ void leerLDR() {
 
 // Función para mostrar valores en Serial
 void mostrarLDR() {
-  Serial.print("Valor ADC: ");
-  Serial.print(valorLDR);
-  Serial.print("  Voltaje: ");
-  Serial.print(voltajeLDR);
-  Serial.println(" V");
+  //Serial.print("Valor ADC: ");
+  Serial.println(valorLDR);
+  //Serial.print("  Voltaje: ");
+  //Serial.print(voltajeLDR);
+  //Serial.println(" V");
 }
 
 // Función para controlar el LED según la luz detectada

@@ -8,7 +8,7 @@ void leerBoton() {
   estadoBoton = digitalRead(PIN_BOTON);
 
   if (estadoBoton == HIGH) {
-    Serial.println("Botón presionado");
+    Serial.println("1");
   } else {
     Serial.println("0");   // Muestra 0 si no hay señal
   }

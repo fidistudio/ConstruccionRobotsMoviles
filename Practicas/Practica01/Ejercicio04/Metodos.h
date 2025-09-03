@@ -10,11 +10,11 @@ void leerComparador() {
 
 // Mostrar en el Monitor Serial
 void mostrarEstadoLuz() {
-  Serial.print("Estado de luz: ");
+  //Serial.print("Estado de luz: ");
   if (estadoLuz == HIGH) {
-    Serial.println("Iluminado");
+    Serial.println("1");
   } else {
-    Serial.println("Oscuro");
+    Serial.println("0");
   }
 }
 

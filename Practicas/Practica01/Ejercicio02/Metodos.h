@@ -20,13 +20,13 @@ void leerTemperatura() {
 
 // Función para mostrar los resultados en Serial
 void mostrarTemperatura() {
-  Serial.print("ADC: ");
-  Serial.print(valorADC);
-  Serial.print("  Voltaje: ");
-  Serial.print(voltaje);
-  Serial.print(" V  Temperatura: ");
-  Serial.print(temperaturaC);
-  Serial.println(" °C");
+  //Serial.print("ADC: ");
+  //Serial.print(valorADC);
+  //Serial.print("  Voltaje: ");
+  //Serial.print(voltaje);
+  //Serial.print(" V  Temperatura: ");
+  Serial.println(temperaturaC);
+  //Serial.println(" °C");
 }
 
 #endif
