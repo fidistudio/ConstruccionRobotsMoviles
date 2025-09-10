@@ -4,7 +4,7 @@
 // --- Pines ---
 const int PIN_CONTACT = 2;         // Botón / Sensor de contacto
 const int PIN_PHOTO_ANALOG = A0;   // Fotoresistencia analógica
-const int PIN_PHOTO_DIGITAL = A1;  // Fotoresistencia digital (umbral)
+const int PIN_PHOTO_DIGITAL = 3;  // Fotoresistencia digital (umbral)
 const int PIN_TEMP = A2;           // LM35
 const int PIN_INFRARED = 3;        // Sensor infrarrojo digital
 

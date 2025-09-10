@@ -18,8 +18,8 @@ int leerPhotoRA() {
 
 // --- Fotoresistencia digital ---
 int leerPhotoRD() {
-    valorPhotoDigital = analogRead(PIN_PHOTO_DIGITAL);
-    return (valorPhotoDigital > PHOTO_THRESHOLD) ? 1 : 0;
+    estadoPhotoDigital = digitalRead(PING_PHOTO_DIGITAL);
+    return estadoPhotoDigital;
 }
 
 // --- LM35 ---
