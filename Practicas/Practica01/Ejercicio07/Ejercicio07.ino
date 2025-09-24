@@ -1,19 +1,28 @@
+#include <Arduino.h>
 #include "Variables.h"
 #include "Metodos.h"
 
 void setup() {
-    Serial.begin(9600);
+  pinMode(PIN_PWM, OUTPUT);
+  pinMode(PIN_COMPARAR, INPUT);
+  Serial.begin(9600);
 
-    pinMode(pinComparador, INPUT);
-    //pinMode(pinLED, OUTPUT);
-    pinMode(pinPWMReferencia, OUTPUT);
-
-    inicializarPWMReferencia();
+  // Calibración automática al encender
+  calibration();
 }
 
 void loop() {
-    leerComparador();
-    mostrarEstadoComparador();
-    controlarLED();
-    delay(100);
+  // Leer si llega un comando por Serial
+  if (Serial.available()) {
+    String comando = Serial.readStringUntil('\n');
+    comando.trim(); // eliminar espacios y saltos de línea
+
+    if (comando == "shs calibration") {
+      calibration();
+    }else if(comando == "shs photord"){
+      // Reporte del estado comparador cada 500 ms
+  reportarEstado();
+    }
+  }
+  delay(500);
 }

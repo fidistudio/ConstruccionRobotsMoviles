@@ -1,12 +1,12 @@
 #include "Variables.h"
 #include "Metodos.h"
 
-String comando = "";
+String command = "";
 
 void setup() {
   Serial.begin(9600);
-  inicializarMotores();
-  Serial.println("Sistema listo. Escriba comandos (ej: A1 on left)");
+  initMotors();
+  Serial.println("System ready. Enter commands.");
 }
 
 void loop() {
@@ -14,13 +14,13 @@ void loop() {
     char c = Serial.read();
 
     if (c == '\n') {
-      comando.trim();
-      if (comando.length() > 0) {
-        procesarComando(comando);
+      command.trim();
+      if (command.length() > 0) {
+        processCommand(command);
       }
-      comando = "";
+      command = "";
     } else {
-      comando += c;
+      command += c;
     }
   }
 }

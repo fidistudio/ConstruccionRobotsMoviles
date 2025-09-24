@@ -1,27 +1,46 @@
 #ifndef METODOS_H
 #define METODOS_H
 
+#include <Arduino.h>
 #include "Variables.h"
 
-// Inicializar PWM de referencia
-void inicializarPWMReferencia() {
-    analogWrite(pinPWMReferencia, referenciaPWM);
+// Leer el estado digital del comparador
+int leerComparador() {
+  return digitalRead(PIN_COMPARAR);  // HIGH si LDR > PWM, LOW si LDR <= PWM
 }
 
-// Leer salida digital del comparador
-void leerComparador() {
-    estadoComparador = digitalRead(pinComparador);
+// Aplicar PWM al pin de salida
+void aplicarPWM(int valor) {
+  analogWrite(PIN_PWM, valor);
 }
 
-// Mostrar estado en el monitor serial
-void mostrarEstadoComparador() {
-    Serial.print("Comparador: ");
-    Serial.println(estadoComparador == HIGH ? "1" : "0");
+// Calibración automática
+void calibration() {
+
+  int pwm = 0;
+  aplicarPWM(pwm);
+
+  // Incrementar PWM hasta que el comparador pase a LOW
+  while (leerComparador() == HIGH && pwm < 255) {
+    pwm++;
+    aplicarPWM(pwm);
+    delay(5); // pequeño retardo para que el comparador responda
+  }
+
+  pwmReferencia = pwm;
+  Serial.println("Calibration complete. ");
+  //Serial.println(pwmReferencia);
 }
 
-// Controlar LED según salida del comparador
-void controlarLED() {
-    digitalWrite(pinLED, estadoComparador);
+// Reporte del estado actual
+void reportarEstado() {
+  int estado = leerComparador();
+  //Serial.print("Estado comparador: ");
+  if (estado == HIGH) Serial.println("1");
+  else Serial.println("0");
+  //Serial.print("PWM referencia: ");
+  //Serial.println(pwmReferencia);
 }
 
 #endif
+

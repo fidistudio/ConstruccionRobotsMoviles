@@ -1,10 +1,10 @@
-#ifndef METODOS_H
-#define METODOS_H
+#ifndef METHODS_H
+#define METHODS_H
 
 #include "Variables.h"
 
-// Inicializa pines
-void inicializarMotores() {
+// Initialize motor pins
+void initMotors() {
   pinMode(A1_EN, OUTPUT);
   pinMode(A1_IN1, OUTPUT);
   pinMode(A1_IN2, OUTPUT);
@@ -17,8 +17,8 @@ void inicializarMotores() {
   digitalWrite(A2_EN, HIGH);
 }
 
-// Controla un motor específico
-void controlarMotor(const String& motor, EstadoMotor estado, DireccionMotor direccion) {
+// Control a specific motor
+void controlMotor(const String& motor, MotorState state, MotorDirection direction) {
   int in1, in2;
 
   if (motor == "A1") {
@@ -28,20 +28,20 @@ void controlarMotor(const String& motor, EstadoMotor estado, DireccionMotor dire
     in1 = A2_IN1;
     in2 = A2_IN2;
   } else {
-    Serial.println("Error: Motor desconocido");
+    Serial.println("Error: Unknown motor");
     return;
   }
 
-  if (estado == OFF) {
+  if (state == OFF) {
     digitalWrite(in1, LOW);
     digitalWrite(in2, LOW);
     return;
   }
 
-  if (direccion == LEFT) {
+  if (direction == LEFT) {
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
-  } else if (direccion == RIGHT) {
+  } else if (direction == RIGHT) {
     digitalWrite(in1, LOW);
     digitalWrite(in2, HIGH);
   } else {
@@ -50,34 +50,34 @@ void controlarMotor(const String& motor, EstadoMotor estado, DireccionMotor dire
   }
 }
 
-// Procesa un comando en formato texto
-void procesarComando(const String& comando) {
-  String motor, accion, direccion;
-  int primerEspacio = comando.indexOf(' ');
-  int segundoEspacio = comando.indexOf(' ', primerEspacio + 1);
+// Process a text-based command
+void processCommand(const String& command) {
+  String motor, action, direction;
+  int firstSpace = command.indexOf(' ');
+  int secondSpace = command.indexOf(' ', firstSpace + 1);
 
-  if (primerEspacio == -1) return;
+  if (firstSpace == -1) return;
 
-  motor = comando.substring(0, primerEspacio);
-  accion = (segundoEspacio == -1) ? comando.substring(primerEspacio + 1) 
-                                  : comando.substring(primerEspacio + 1, segundoEspacio);
-  direccion = (segundoEspacio == -1) ? "" : comando.substring(segundoEspacio + 1);
+  motor = command.substring(0, firstSpace);
+  action = (secondSpace == -1) ? command.substring(firstSpace + 1) 
+                               : command.substring(firstSpace + 1, secondSpace);
+  direction = (secondSpace == -1) ? "" : command.substring(secondSpace + 1);
 
-  accion.toLowerCase();
-  direccion.toLowerCase();
+  action.toLowerCase();
+  direction.toLowerCase();
 
-  if (accion == "off") {
-    controlarMotor(motor, OFF, STOP);
-  } else if (accion == "on") {
-    if (direccion == "left") {
-      controlarMotor(motor, ON, LEFT);
-    } else if (direccion == "right") {
-      controlarMotor(motor, ON, RIGHT);
+  if (action == "off") {
+    controlMotor(motor, OFF, STOP);
+  } else if (action == "on") {
+    if (direction == "left") {
+      controlMotor(motor, ON, LEFT);
+    } else if (direction == "right") {
+      controlMotor(motor, ON, RIGHT);
     } else {
-      Serial.println("Error: Dirección inválida");
+      Serial.println("Error: Invalid direction");
     }
   } else {
-    Serial.println("Error: Acción inválida");
+    Serial.println("Error: Invalid action");
   }
 }
 
