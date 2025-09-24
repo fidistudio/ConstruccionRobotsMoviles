@@ -18,22 +18,32 @@ int leerPhotoRA() {
 
 // --- Fotoresistencia digital ---
 int leerPhotoRD() {
-    estadoPhotoDigital = digitalRead(PING_PHOTO_DIGITAL);
+    estadoPhotoDigital = digitalRead(PIN_PHOTO_DIGITAL);
     return estadoPhotoDigital;
 }
 
 // --- LM35 ---
 float leerTemp() {
     int val = analogRead(PIN_TEMP);
-    float voltaje = val * (5.0 / 1023.0);
+    float voltaje = (val * 5.0) / 1023.0;
     temperaturaC = voltaje * 100.0;
     return temperaturaC;
 }
 
 // --- Infrarrojo ---
 int leerInfrared() {
-    estadoInfrared = digitalRead(PIN_INFRARED);
+    estadoInfrared = analogRead(PIN_INFRARED);
     return estadoInfrared;
+}
+
+// Convierte el valor crudo ADC a distancia (cm)
+float calcularDistancia(int rawValue) {
+    // Rango válido del sensor (~80 a 530 ADC)
+    if (rawValue >= 80 && rawValue <= 530) {
+        return 2076.0 / (rawValue - 11.0); 
+    } else {
+        return -1; // Valor fuera de rango
+    }
 }
 
 // --- Procesar comando Serial ---
@@ -56,7 +66,7 @@ void procesarComando(String command) {
     } else if (sensor == "temp") {
         Serial.println(leerTemp());
     } else if (sensor == "infrared") {
-        Serial.println(leerInfrared());
+        Serial.println(distancia = calcularDistancia(leerInfrared()));
     } else {
         Serial.println("Sensor no reconocido");
     }
