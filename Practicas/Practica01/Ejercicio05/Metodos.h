@@ -1,30 +1,30 @@
-#ifndef METODOS_H
-#define METODOS_H
+#ifndef METHODS_H
+#define METHODS_H
 
 #include "Variables.h"
 
-// Lee el valor analógico (raw ADC)
-int leerValorSensor() {
+// Read raw analog value (ADC)
+int readSensor() {
     return analogRead(SENSOR_PIN);
 }
 
-// Convierte el valor crudo ADC a distancia (cm)
-float calcularDistancia(int rawValue) {
-    // Rango válido del sensor (~80 a 530 ADC)
+// Convert raw ADC value to distance (cm)
+float calculateDistance(int rawValue) {
+    // Valid sensor range (~80 to 530 ADC)
     if (rawValue >= 80 && rawValue <= 530) {
         return 2076.0 / (rawValue - 11.0); 
     } else {
-        return -1; // Valor fuera de rango
+        return -1; // Out of range
     }
 }
 
-// Muestra la distancia medida por Serial
-void mostrarDistancia(float distancia) {
-    if (distancia < 0) {
-        Serial.println("Error de lectura");
+// Print measured distance to Serial
+void printDistance(float distance) {
+    if (distance < 0) {
+        Serial.println("Reading error");
     } else {
-        Serial.print("Distancia: ");
-        Serial.print(distancia);
+        Serial.print("Distance: ");
+        Serial.print(distance);
         Serial.println(" cm");
     }
 }

@@ -1,11 +1,11 @@
 #include <Arduino.h>
 #include "Variables.h"
-#include "Metodos.h"
+#include "Methods.h"
 
 void setup() {
     Serial.begin(9600);
 
-    // Pines digitales
+    // Digital pins
     pinMode(PIN_CONTACT, INPUT);
     pinMode(PIN_PHOTO_DIGITAL, INPUT);
     pinMode(PIN_INFRARED, INPUT);
@@ -14,6 +14,6 @@ void setup() {
 void loop() {
     if (Serial.available() > 0) {
         String command = Serial.readStringUntil('\n');
-        procesarComando(command);
+        processCommand(command);
     }
 }

@@ -1,11 +1,11 @@
 #include "Variables.h"
-#include "Metodos.h"
+#include "Methods.h"
 
 void setup() {
   Serial.begin(9600);
-  pinMode(PIN_BOTON, INPUT);   // Botón con resistencia en pulldown externa
+  pinMode(BUTTON_PIN, INPUT);   // Button with external pulldown resistor
 }
 
 void loop() {
-  leerBoton();   // Método separado en metodos.h
+  readButton();   // Method defined in Methods.h
 }

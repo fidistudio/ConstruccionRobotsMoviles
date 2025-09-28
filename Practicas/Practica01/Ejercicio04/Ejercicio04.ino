@@ -1,15 +1,15 @@
 #include "Variables.h"
-#include "Metodos.h"
+#include "Methods.h"
 
 void setup() {
   Serial.begin(9600);
-  pinMode(pinComparador, INPUT);
-  pinMode(pinLED, OUTPUT);
+  pinMode(COMPARATOR_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
 }
 
 void loop() {
-  leerComparador();
-  mostrarEstadoLuz();
-  //controlarLED();
-  delay(500); // medio segundo entre lecturas
+  readComparator();
+  printLightState();
+  //controlLED();
+  delay(500); // Half a second between readings
 }

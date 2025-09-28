@@ -1,12 +1,12 @@
 #include "Variables.h"
-#include "Metodos.h"
+#include "Methods.h"
 
 void setup() {
   Serial.begin(9600);
 }
 
 void loop() {
-  leerTemperatura();
-  mostrarTemperatura();
-  delay(1000); // Espera 1 segundo entre lecturas
+  readTemperature();
+  printTemperature();
+  delay(1000); // Wait 1 second between readings
 }

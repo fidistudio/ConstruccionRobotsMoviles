@@ -1,23 +1,22 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-// --- Pines ---
-const int PIN_CONTACT = 2;         // Botón / Sensor de contacto
-const int PIN_PHOTO_ANALOG = A0;   // Fotoresistencia analógica
-const int PIN_PHOTO_DIGITAL = 3;  // Fotoresistencia digital (umbral)
-const int PIN_TEMP = A2;           // LM35
-const int PIN_INFRARED = A3;        // Sensor infrarrojo digital
+// --- Pins ---
+const int PIN_CONTACT = 2;        // Button / Contact sensor
+const int PIN_PHOTO_ANALOG = A0;  // Photoresistor (analog)
+const int PIN_PHOTO_DIGITAL = 3;  // Photoresistor (digital threshold)
+const int PIN_TEMP = A2;          // LM35
+const int PIN_INFRARED = A3;      // Infrared sensor
 
-// --- Umbrales ---
-const int PHOTO_THRESHOLD = 512;   // Para convertir fotoresistencia a digital
+// --- Thresholds ---
+const int PHOTO_THRESHOLD = 512;  // For analog photoresistor thresholding
 
-// --- Variables globales ---
-int estadoContact = 0;
-int estadoPhotoDigital = 0;
-int valorPhotoAnalog = 0;
-int valorPhotoDigital = 0;
-float temperaturaC = 0;
-int estadoInfrared = 0;
-float distancia = 0;
+// --- Global variables ---
+int contactState = 0;
+int photoDigitalState = 0;
+int photoAnalogValue = 0;
+float temperatureC = 0;
+int infraredRaw = 0;
+float distance = 0;
 
 #endif

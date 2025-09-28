@@ -1,29 +1,28 @@
-#ifndef METODOS_H
-#define METODOS_H
+#ifndef METHODS_H
+#define METHODS_H
 
 #include "Variables.h"
 
-// Leer el estado del comparador (0 = poca luz, 1 = mucha luz)
-void leerComparador() {
-  estadoLuz = digitalRead(pinComparador);
+// Read comparator state (0 = low light, 1 = bright light)
+void readComparator() {
+  lightState = digitalRead(COMPARATOR_PIN);
 }
 
-// Mostrar en el Monitor Serial
-void mostrarEstadoLuz() {
-  //Serial.print("Estado de luz: ");
-  if (estadoLuz == HIGH) {
+// Print light state to Serial
+void printLightState() {
+  if (lightState == HIGH) {
     Serial.println("1");
   } else {
     Serial.println("0");
   }
 }
 
-// Controlar LED según estado del comparador
-void controlarLED() {
-  if (estadoLuz == HIGH) {
-    digitalWrite(pinLED, HIGH);  // Enciende LED si hay luz
+// Control LED based on comparator state
+void controlLED() {
+  if (lightState == HIGH) {
+    digitalWrite(LED_PIN, HIGH);  // Turn LED on if bright
   } else {
-    digitalWrite(pinLED, LOW);   // Apaga LED si está oscuro
+    digitalWrite(LED_PIN, LOW);   // Turn LED off if dark
   }
 }
 

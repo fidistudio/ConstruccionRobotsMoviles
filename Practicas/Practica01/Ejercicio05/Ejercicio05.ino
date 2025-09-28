@@ -1,5 +1,5 @@
 #include "Variables.h"
-#include "Metodos.h"
+#include "Methods.h"
 
 void setup() {
     Serial.begin(9600);
@@ -12,8 +12,8 @@ void loop() {
     if (currentTime - lastSampleTime >= SAMPLE_INTERVAL) {
         lastSampleTime = currentTime;
 
-        int rawValue = leerValorSensor();
-        float distancia = calcularDistancia(rawValue);
-        mostrarDistancia(distancia);
+        int rawValue = readSensor();
+        float distance = calculateDistance(rawValue);
+        printDistance(distance);
     }
 }

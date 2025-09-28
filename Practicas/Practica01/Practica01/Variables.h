@@ -1,10 +1,10 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-// Pin donde está conectado el pushbutton
-const int PIN_BOTON = 2;  
+// Pin where the pushbutton is connected
+const int BUTTON_PIN = 2;  
 
-// Variable global para almacenar estado
-int estadoBoton = 0;
+// Global variable to store the button state
+int buttonState = 0;
 
 #endif

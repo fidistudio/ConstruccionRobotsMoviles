@@ -1,30 +1,25 @@
-
-#ifndef METODOS_H
-#define METODOS_H
+#ifndef METHODS_H
+#define METHODS_H
 
 #include "Variables.h"
 
-// Función para leer el valor del LDR
-void leerLDR() {
-  valorLDR = analogRead(pinLDR);
-  voltajeLDR = (valorLDR * 5.0) / 1023.0;
+// Read the LDR value
+void readLDR() {
+  ldrValue = analogRead(LDR_PIN);
+  ldrVoltage = (ldrValue * 5.0) / 1023.0;
 }
 
-// Función para mostrar valores en Serial
-void mostrarLDR() {
-  //Serial.print("Valor ADC: ");
-  Serial.println(valorLDR);
-  //Serial.print("  Voltaje: ");
-  //Serial.print(voltajeLDR);
-  //Serial.println(" V");
+// Print LDR value to Serial
+void printLDR() {
+  Serial.println(ldrValue);
 }
 
-// Función para controlar el LED según la luz detectada
-void controlarLED() {
-  if (valorLDR < UMBRAL_LUZ) {
-    digitalWrite(pinLED, HIGH); // Encender LED (hay poca luz)
+// Control LED based on light level
+void controlLED() {
+  if (ldrValue < LIGHT_THRESHOLD) {
+    digitalWrite(LED_PIN, HIGH); // Turn LED on (low light)
   } else {
-    digitalWrite(pinLED, LOW);  // Apagar LED (hay suficiente luz)
+    digitalWrite(LED_PIN, LOW);  // Turn LED off (enough light)
   }
 }
 

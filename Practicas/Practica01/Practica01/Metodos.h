@@ -1,19 +1,19 @@
-#ifndef METODOS_H
-#define METODOS_H
+#ifndef METHODS_H
+#define METHODS_H
 
 #include "Variables.h"
 
-// Función para leer y mostrar estado del botón
-void leerBoton() {
-  estadoBoton = digitalRead(PIN_BOTON);
+// Function to read and print button state
+void readButton() {
+  buttonState = digitalRead(BUTTON_PIN);
 
-  if (estadoBoton == HIGH) {
+  if (buttonState == HIGH) {
     Serial.println("1");
   } else {
-    Serial.println("0");   // Muestra 0 si no hay señal
+    Serial.println("0");   // Prints 0 when button is not pressed
   }
 
-  delay(200); // Para evitar saturar el monitor serial
+  delay(200); // Prevents flooding the serial monitor
 }
 
 #endif

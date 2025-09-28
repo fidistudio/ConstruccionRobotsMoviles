@@ -1,17 +1,17 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-// Pin analógico donde está conectado el LDR
-const int pinLDR = A0;
+// Analog pin for the LDR
+const int LDR_PIN = A0;
 
-// Pin digital para el LED
-const int pinLED = 13;
+// Digital pin for the LED
+const int LED_PIN = 13;
 
-// Variables globales
-int valorLDR = 0;
-float voltajeLDR = 0.0;
+// Global variables
+int ldrValue = 0;
+float ldrVoltage = 0.0;
 
-// Umbral para prender el LED (ajustable según pruebas)
-const int UMBRAL_LUZ = 900;
+// Threshold to turn the LED on (adjust as needed)
+const int LIGHT_THRESHOLD = 900;
 
 #endif

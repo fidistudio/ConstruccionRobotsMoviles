@@ -1,13 +1,13 @@
 #ifndef VARIABLES_H
 #define VARIABLES_H
 
-// Pin digital conectado a la salida del LM339
-const int pinComparador = 2;
+// Digital pin connected to LM339 output
+const int COMPARATOR_PIN = 2;
 
-// Pin LED indicador
-const int pinLED = 13;
+// Indicator LED pin
+const int LED_PIN = 13;
 
-// Variable global para guardar el estado leído
-int estadoLuz = 0;
+// Global variable to store the light state
+int lightState = 0;
 
 #endif
