@@ -2,7 +2,7 @@
 
 // Pines para cada motor
 const uint8_t A1_EN  = 5;  // PWM
-const uint8_t A1_IN1 = 2;
+const uint8_t A1_IN1 = 8;
 const uint8_t A1_IN2 = 3;
 
 const uint8_t A2_EN  = 6;  // PWM
