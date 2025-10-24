@@ -1,8 +1,13 @@
 
 #include "MotorPWM.h"
 
-MotorPWM motorA1(5, 7);
-MotorPWM motorA2(6, 8);
+const int A1SpeedPin = 5; 
+const int A1DirectionPin =7; 
+const int A2SpeedPin = 6; 
+const int A2DirectionPin = 8;
+
+MotorPWM motorA1(A1SpeedPin, A1DirectionPin);
+MotorPWM motorA2(A2SpeedPin, A2DirectionPin);
 
 String serialCommand = "";
 
