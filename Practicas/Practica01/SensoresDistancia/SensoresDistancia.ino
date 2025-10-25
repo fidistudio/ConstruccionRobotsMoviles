@@ -2,8 +2,8 @@
 #include "IRSensor.h"
 
 // Crear instancias de sensores
-IRSensor sensorDerecho(A0, 300);
-IRSensor sensorIzquierdo(A1, 300);
+IRSensor sensorDerecho(A1, 300);
+IRSensor sensorIzquierdo(A0, 300);
 
 void setup() {
   Serial.begin(9600);
