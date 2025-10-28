@@ -1,12 +1,12 @@
 #include "DifferentialDrive.h"
 
-DifferentialDrive::DifferentialDrive(MotorPWM &left, MotorPWM &right,
-                                     const Params &p)
-    : _leftMotor(left), _rightMotor(right), _p(p) {}
+DifferentialDrive::DifferentialDrive(MotorPWM &left, MotorPWM &right, ContactSensor &contactLeft, ContactSensor &contactRight, const Params &p) : _leftMotor(left), _rightMotor(right), _contactLeft(contactLeft), _contactRight(contactRight), _p(p) {}
 
 void DifferentialDrive::begin() {
   _leftMotor.begin();
   _rightMotor.begin();
+  _contactLeft.begin();
+  _contactRight.begin();
   stop();
 }
 

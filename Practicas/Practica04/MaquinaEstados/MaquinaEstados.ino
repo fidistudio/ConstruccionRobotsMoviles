@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include "MotorPWM.h"
 #include "IRSensor.h"
+#include "ContactSensor.h"
 #include "DifferentialDrive.h"
 
 // === Pines ===
@@ -15,12 +16,19 @@ constexpr int RIGHT_DIR_PIN   = 8;
 
 constexpr int IR_LEFT_PIN = A0;
 constexpr int IR_RIGHT_PIN = A1;
-constexpr int IR_LEFT_THRESHOLD = 300;
-constexpr int IR_RIGHT_THRESHOLD = 300;
+constexpr int IR_LEFT_THRESHOLD = 500;
+constexpr int IR_RIGHT_THRESHOLD = 500;
+
+constexpr int LEFT_CONTACT_PIN = 9;
+constexpr int RIGHT_CONTACT_PIN = 12;
 
 // === Sensores IR ===
 IRSensor irLeft(IR_LEFT_PIN, IR_LEFT_THRESHOLD);
 IRSensor irRight(IR_RIGHT_PIN, IR_RIGHT_THRESHOLD);
+
+// === Sensores Contacto ===
+ContactSensor contactLeft(LEFT_CONTACT_PIN, false);
+ContactSensor contactRight(RIGHT_CONTACT_PIN, false);
 
 // === Motores ===
 MotorPWM leftMotor(LEFT_SPEED_PIN, LEFT_DIR_PIN);
@@ -32,10 +40,10 @@ DifferentialDrive::Params P{
   .wheelRadiusRight = 0.04415f / 2.0f,
   .wheelBase        = 0.09790f,
   .ticksPerRev      = 700,
-  .duty             = 80
+  .duty             = 100
 };
 
-DifferentialDrive drive(leftMotor, rightMotor, P);
+DifferentialDrive drive(leftMotor, rightMotor,contactLeft, contactRight, P);
 
 // === ISR trampolines ===
 void onLeftEncoderTick()  { drive.onLeftTick(); }
@@ -46,10 +54,12 @@ float shs(char* /*sensor*/, int num) {
   bool obs = false;
   if (num == 1) {
     irLeft.update();
-    obs = irLeft.isObstacleDetected();
+    contactLeft.update();
+    obs = irLeft.isObstacleDetected() || contactLeft.isObstacleDetected();
   } else {
     irRight.update();
-    obs = irRight.isObstacleDetected();
+    contactRight.update();
+    obs = irRight.isObstacleDetected() || contactRight.isObstacleDetected();
   }
   return obs ? 1.0f : 0.0f;
 }

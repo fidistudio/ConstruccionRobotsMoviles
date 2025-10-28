@@ -2,6 +2,7 @@
 #define DIFFERENTIAL_DRIVE_H
 
 #include "MotorPWM.h"
+#include "ContactSensor.h"
 #include <Arduino.h>
 
 class DifferentialDrive {
@@ -14,7 +15,7 @@ public:
     int duty;               // 0..255
   };
 
-  DifferentialDrive(MotorPWM &left, MotorPWM &right, const Params &p);
+  DifferentialDrive(MotorPWM &left, MotorPWM &right, ContactSensor &contactLeft, ContactSensor &contactRight, const Params &p);
 
   void begin();
 
@@ -40,6 +41,8 @@ public:
 private:
   MotorPWM &_leftMotor;
   MotorPWM &_rightMotor;
+  ContactSensor &_contactLeft;
+  ContactSensor &_contactRight;
   Params _p;
 
   volatile long _leftCount = 0;
