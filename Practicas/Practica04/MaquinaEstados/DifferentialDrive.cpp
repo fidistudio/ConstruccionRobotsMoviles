@@ -48,6 +48,15 @@ void DifferentialDrive::driveUntilTicks(long goalLeft, long goalRight,
   }
 
   while (_leftCount < goalLeft && _rightCount < goalRight) {
+    updateContacts();
+    if (_interrupted){
+      stop();
+      _leftMotor.setSpeed(-_p.duty);
+      _rightMotor.setSpeed(-_p.duty);
+      delay(300);
+      stop();
+      break;
+    }
     if (_debug) {
       Serial.print(F("L "));
       Serial.print(_leftCount);
@@ -102,4 +111,10 @@ void DifferentialDrive::moveRobot(float linearMeters, float angularDegrees) {
 void DifferentialDrive::stop() {
   _leftMotor.setSpeed(0);
   _rightMotor.setSpeed(0);
+}
+
+void DifferentialDrive::updateContacts(){
+  _contactLeft.update();
+  _contactRight.update();
+  _interrupted = _contactLeft.isObstacleDetected() || _contactRight.isObstacleDetected();
 }

@@ -15,16 +15,19 @@ constexpr int RIGHT_SPEED_PIN = 6;
 constexpr int RIGHT_DIR_PIN   = 8;
 
 constexpr int IR_LEFT_PIN = A0;
-constexpr int IR_RIGHT_PIN = A1;
+constexpr int IR_RIGHT_PIN = A2;
+constexpr int IR_FRONT_PIN = A1;
 constexpr int IR_LEFT_THRESHOLD = 500;
 constexpr int IR_RIGHT_THRESHOLD = 500;
+constexpr int IR_FRONT_THRESHOLD = 600;
 
 constexpr int LEFT_CONTACT_PIN = 9;
-constexpr int RIGHT_CONTACT_PIN = 12;
+constexpr int RIGHT_CONTACT_PIN = 10;
 
 // === Sensores IR ===
 IRSensor irLeft(IR_LEFT_PIN, IR_LEFT_THRESHOLD);
 IRSensor irRight(IR_RIGHT_PIN, IR_RIGHT_THRESHOLD);
+IRSensor irFront(IR_FRONT_PIN, IR_FRONT_THRESHOLD);
 
 // === Sensores Contacto ===
 ContactSensor contactLeft(LEFT_CONTACT_PIN, false);
@@ -56,16 +59,19 @@ float shs(char* /*sensor*/, int num) {
     irLeft.update();
     contactLeft.update();
     obs = irLeft.isObstacleDetected() || contactLeft.isObstacleDetected();
-  } else {
+  } else if (num ==2) {
     irRight.update();
     contactRight.update();
     obs = irRight.isObstacleDetected() || contactRight.isObstacleDetected();
+  } else {
+    irFront.update();
+    obs = irFront.isObstacleDetected();
   }
   return obs ? 1.0f : 0.0f;
 }
 
 // === Macros de movimiento ===
-float AVANCE = 0.10f;  // Metros
+float AVANCE = 0.05;  // Metros
 float GIRO   = 45;     // Grados
 
 #define ADELANTE  drive.moveRobot( AVANCE,  0.0f)
@@ -92,14 +98,17 @@ void loop() {
 
   float Si = shs((char*)"contact", 1);
   float Sd = shs((char*)"contact", 2);
+  float Sf = shs((char*)"contact", 3);
 
   switch (estado) {
+    
     case 0:
-      if (Si == 0 && Sd == 0)       { estado = 0;  ADELANTE;  Serial.println("ADELANTE"); }
+      if (Sf == 1)                  { estado = 5;  ALTO;      Serial.println("ALTO"); }
+      else if (Si == 0 && Sd == 0)  { estado = 0;  ADELANTE;  Serial.println("ADELANTE"); }
       else if (Si == 0 && Sd == 1)  { estado = 1;  ALTO;      Serial.println("ALTO"); }
       else if (Si == 1 && Sd == 0)  { estado = 3;  ALTO;      Serial.println("ALTO"); }
-      else                          { estado = 5;  ALTO;      Serial.println("ALTO"); }
       break;
+
 
     case 1:  estado = 2;  ATRAS;     Serial.println("ATRAS");     break;
     case 2:  estado = 0;  GIRO_IZQ;  Serial.println("IZQUIERDA"); break;

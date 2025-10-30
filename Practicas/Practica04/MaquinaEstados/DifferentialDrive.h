@@ -34,6 +34,7 @@ public:
   void resetEncoders();
   long leftCount() const { return _leftCount; }
   long rightCount() const { return _rightCount; }
+  bool isInterrupted() const { return _interrupted;}
 
   // (Opcional) logging por puerto serie
   void setDebug(bool enabled) { _debug = enabled; }
@@ -47,6 +48,7 @@ private:
 
   volatile long _leftCount = 0;
   volatile long _rightCount = 0;
+  volatile bool _interrupted = false;
 
   bool _debug = false;
 
@@ -54,6 +56,7 @@ private:
   inline long ticksFromMetersRight(float m) const;
   void driveUntilTicks(long goalLeft, long goalRight, int leftCmd, int rightCmd,
                        const __FlashStringHelper *tag);
+  void updateContacts();
 };
 
 #endif
