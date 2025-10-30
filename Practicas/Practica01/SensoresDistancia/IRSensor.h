@@ -11,6 +11,9 @@ private:
   bool obstacle; // Bandera interna
 
 public:
+
+  int rawValue = 0;
+  
   // Constructor
   IRSensor(int sensorPin, int threshold);
 
@@ -19,6 +22,8 @@ public:
 
   // Obtener la bandera
   bool isObstacleDetected() const;
+
+  void printRawValue();
 };
 
 #endif

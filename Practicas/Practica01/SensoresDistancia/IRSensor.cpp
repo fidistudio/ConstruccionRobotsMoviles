@@ -10,9 +10,14 @@ IRSensor::IRSensor(int sensorPin, int threshold) {
 
 // Leer sensor y actualizar bandera
 void IRSensor::update() {
-  int rawValue = analogRead(pin);
+  rawValue = analogRead(pin);
   obstacle = (rawValue > umbral);
 }
 
 // Obtener la bandera
 bool IRSensor::isObstacleDetected() const { return obstacle; }
+
+void IRSensor::printRawValue(){
+  Serial.print("Raw value: ");
+  Serial.println(rawValue); 
+}
