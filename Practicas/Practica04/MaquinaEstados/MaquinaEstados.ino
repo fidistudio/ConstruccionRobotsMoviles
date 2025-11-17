@@ -10,19 +10,19 @@ constexpr int ENCODER_LEFT_PIN  = 2;
 constexpr int ENCODER_RIGHT_PIN = 3;
 
 constexpr int LEFT_SPEED_PIN  = 5;
-constexpr int LEFT_DIR_PIN    = 7;
+constexpr int LEFT_DIR_PIN    = 4;
 constexpr int RIGHT_SPEED_PIN = 6;
-constexpr int RIGHT_DIR_PIN   = 8;
+constexpr int RIGHT_DIR_PIN   = 7;
 
-constexpr int IR_LEFT_PIN = A0;
-constexpr int IR_RIGHT_PIN = A2;
-constexpr int IR_FRONT_PIN = A1;
+constexpr int IR_LEFT_PIN = A3;
+constexpr int IR_RIGHT_PIN = A5;
+constexpr int IR_FRONT_PIN = A4;
 constexpr int IR_LEFT_THRESHOLD = 500;
 constexpr int IR_RIGHT_THRESHOLD = 500;
 constexpr int IR_FRONT_THRESHOLD = 600;
 
 constexpr int LEFT_CONTACT_PIN = 9;
-constexpr int RIGHT_CONTACT_PIN = 10;
+constexpr int RIGHT_CONTACT_PIN = 8;
 
 // === Sensores IR ===
 IRSensor irLeft(IR_LEFT_PIN, IR_LEFT_THRESHOLD);
