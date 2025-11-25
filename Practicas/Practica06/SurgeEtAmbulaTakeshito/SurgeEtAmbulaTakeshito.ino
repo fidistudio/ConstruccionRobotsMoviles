@@ -17,14 +17,14 @@ constexpr int RIGHT_DIR_PIN   = 7;
 constexpr int IR_LEFT_PIN = A3;
 constexpr int IR_RIGHT_PIN = A5;
 constexpr int IR_FRONT_PIN = A4;
-constexpr int IR_LEFT_THRESHOLD = 500;
-constexpr int IR_RIGHT_THRESHOLD = 500;
-constexpr int IR_FRONT_THRESHOLD = 600;
+constexpr int IR_LEFT_THRESHOLD = 375;
+constexpr int IR_RIGHT_THRESHOLD = 375;
+constexpr int IR_FRONT_THRESHOLD = 475;
 
 constexpr int LEFT_CONTACT_PIN = 9;
 constexpr int RIGHT_CONTACT_PIN = 8;
 
-constexpr int LIGHT_THRESHOLD = 800;
+constexpr int LIGHT_THRESHOLD = 200;
 
 // === Sensores IR ===
 IRSensor irLeft(IR_LEFT_PIN, IR_LEFT_THRESHOLD);
@@ -48,7 +48,7 @@ DifferentialDrive::Params P{
   .wheelRadiusRight = 0.04415f / 2.0f,
   .wheelBase        = 0.09790f,
   .ticksPerRev      = 700,
-  .duty             = 100
+  .duty             = 150
 };
 
 DifferentialDrive drive(leftMotor, rightMotor,contactLeft, contactRight, P);
@@ -76,7 +76,7 @@ float shs(char* /*sensor*/, int num) {
 }
 
 // === Macros de movimiento ===
-float AVANCE = 0.05;  // Metros
+float AVANCE = 0.03;  // Metros
 float GIRO   = 45;     // Grados
 
 #define ADELANTE  drive.moveRobot( AVANCE,  0.0f)
@@ -101,71 +101,66 @@ void setup() {
 // === Loop principal ===
 void loop() {
 sensorArray.readSectors();
-  static int estado = 1;
+  static int estado = 0;
   uint8_t brightest = sensorArray.getBrightestSector();
 
   float Si = shs((char*)"contact", 1);
   float Sd = shs((char*)"contact", 2);
   float Sf = shs((char*)"contact", 3);
 
-  int obstacle = 0;
-  if (Sf == 1) obstacle = 3;
-  if (Si == 1 && Sd == 0) obstacle = 2; 
-  if (Sd == 1 && Si == 0) obstacle = 1;
-  
   switch (estado) {
     
-    case 1:
+    case 0:
       if (sensorArray.hasArrivedToDestination()) {
-        estado = 1; 
+        estado = 0; 
         ALTO; 
         Serial.println("ALTO");
       }
       else {
-        estado = 2; 
+        estado = 1; 
         ADELANTE; 
         Serial.println("ADELANTE"); 
       }
     break; 
 
-    case 2:
-      if (obstacle == 3)            { estado = 7;  ALTO;      Serial.println("ALTO"); }
-      else if (obstacle == 2)       { estado = 5;  ALTO;  Serial.println("ALTO"); }
-      else if (obstacle == 1)       { estado = 3;  ALTO;      Serial.println("ALTO"); }
-      else if (obstacle == 0)       { estado = 14;  ADELANTE;      Serial.println("ADELANTE"); }
+    case 1:
+      if      (Sf == 1)                  { estado = 6;  ALTO;      Serial.println("ALTO"); }
+      else if (Si == 1 && Sd == 0)       { estado = 4;  ALTO;      Serial.println("ALTO"); }
+      else if (Si == 0 && Sd == 1)       { estado = 2;  ALTO;      Serial.println("ALTO"); }
+      else if (Si == 0 && Sd == 0)       { estado = 13; ADELANTE;  Serial.println("ADELANTE"); }
       break;
 
 
-    case 3:  estado = 4;  ATRAS;     Serial.println("ATRAS");     break;
-    case 4:  estado = 1;  GIRO_IZQ;  Serial.println("IZQUIERDA"); break;
-    case 5:  estado = 6;  ATRAS;     Serial.println("ATRAS");     break;
-    case 6:  estado = 1;  GIRO_DER;  Serial.println("DERECHA");   break;
-    case 7:  estado = 8;  ATRAS;     Serial.println("ATRAS");     break;
+    case 2:  estado = 3;  ATRAS;     Serial.println("ATRAS");     break;
+    case 3:  estado = 0;  GIRO_IZQ;  Serial.println("IZQUIERDA"); break;
+    case 4:  estado = 5;  ATRAS;     Serial.println("ATRAS");     break;
+    case 5:  estado = 0;  GIRO_DER;  Serial.println("DERECHA");   break;
+    case 6:  estado = 7;  ATRAS;     Serial.println("ATRAS");     break;
+    case 7:  estado = 8;  GIRO_IZQ;  Serial.println("IZQUIERDA"); break;
     case 8:  estado = 9;  GIRO_IZQ;  Serial.println("IZQUIERDA"); break;
-    case 9:  estado = 10; GIRO_IZQ;  Serial.println("IZQUIERDA"); break;
+    case 9:  estado = 10; ADELANTE;  Serial.println("ADELANTE");  break;
     case 10: estado = 11; ADELANTE;  Serial.println("ADELANTE");  break;
-    case 11: estado = 12; ADELANTE;  Serial.println("ADELANTE");  break;
-    case 12: estado = 13; GIRO_DER;  Serial.println("DERECHA");   break;
-    case 13: estado = 1;  GIRO_DER;  Serial.println("DERECHA");   break;
+    case 11: estado = 12; GIRO_DER;  Serial.println("DERECHA");   break;
+    case 12: estado = 0;  GIRO_DER;  Serial.println("DERECHA");   break;
 
-    case 14:
+    case 13:
       if (brightest == 3) {
-        estado = 4;
+        estado = 3;
         ADELANTE;
         Serial.println("ADELANTE");
       } 
       else if (brightest == 2) {
-        estado = 6;
+        estado = 5;
         ADELANTE;
         Serial.println("ADELANTE");
       } 
       else if (brightest == 1) {
-        estado = 4;
+        estado = 3;
         GIRO_IZQ;
         Serial.println("GIRO IZQUIERDA");
       } 
       else if (brightest == 0) {
-        estado = 6;
+        estado = 5;
         GIRO_DER;
         Serial.println("GIRO DERECHA");
       }
