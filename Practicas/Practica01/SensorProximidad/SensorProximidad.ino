@@ -2,7 +2,7 @@
 #include "ContactSensor.h"
 
 ContactSensor leftSensor(9, false);
-ContactSensor rightSensor(10, false);
+ContactSensor rightSensor(8, false);
 
 
 void setup() {
