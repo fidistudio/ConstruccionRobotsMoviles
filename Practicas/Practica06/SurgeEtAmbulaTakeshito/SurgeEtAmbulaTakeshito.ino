@@ -17,14 +17,14 @@ constexpr int RIGHT_DIR_PIN   = 7;
 constexpr int IR_LEFT_PIN = A3;
 constexpr int IR_RIGHT_PIN = A5;
 constexpr int IR_FRONT_PIN = A4;
-constexpr int IR_LEFT_THRESHOLD = 375;
-constexpr int IR_RIGHT_THRESHOLD = 375;
-constexpr int IR_FRONT_THRESHOLD = 475;
+constexpr int IR_LEFT_THRESHOLD = 380;
+constexpr int IR_RIGHT_THRESHOLD = 380;
+constexpr int IR_FRONT_THRESHOLD = 380;
 
 constexpr int LEFT_CONTACT_PIN = 9;
 constexpr int RIGHT_CONTACT_PIN = 8;
 
-constexpr int LIGHT_THRESHOLD = 200;
+constexpr int LIGHT_THRESHOLD = 75;
 
 // === Sensores IR ===
 IRSensor irLeft(IR_LEFT_PIN, IR_LEFT_THRESHOLD);
@@ -76,8 +76,9 @@ float shs(char* /*sensor*/, int num) {
 }
 
 // === Macros de movimiento ===
-float AVANCE = 0.03;  // Metros
-float GIRO   = 45;     // Grados
+float AVANCE_RAW = random(25,40);
+float AVANCE = AVANCE_RAW * 0.001;  // Metros
+float GIRO   = random(40,50);     // Grados
 
 #define ADELANTE  drive.moveRobot( AVANCE,  0.0f)
 #define ATRAS     drive.moveRobot(-AVANCE,  0.0f)
