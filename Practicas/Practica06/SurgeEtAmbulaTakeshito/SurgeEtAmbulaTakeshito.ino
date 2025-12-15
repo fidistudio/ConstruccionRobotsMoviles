@@ -76,14 +76,13 @@ float shs(char* /*sensor*/, int num) {
 }
 
 // === Macros de movimiento ===
-float AVANCE_RAW = random(25,40);
-float AVANCE = AVANCE_RAW * 0.001;  // Metros
-float GIRO   = random(40,50);     // Grados
+float AVANCE = 0.03;  // Metros
+float GIRO   = 45;     // Grados
 
 #define ADELANTE  drive.moveRobot( AVANCE,  0.0f)
 #define ATRAS     drive.moveRobot(-AVANCE,  0.0f)
 #define GIRO_IZQ  drive.moveRobot( 0.0f,   +GIRO)
-#define GIRO_DER  drive.moveRobot( 0.0f,   -GIRO)
+#define GIRO_DER  drive.moveRobot( 0.0f,   -GIRO + 20)
 #define ALTO      drive.stop()
 
 // === Setup ===

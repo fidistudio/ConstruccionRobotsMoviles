@@ -1,0 +1,45 @@
+
+
+
+
+
+
+
+Started logging.
+13:19:05.103540 Language server launched with arguments:
+13:19:05.103561   arg[0] = arduino-language-server
+13:19:05.103577   arg[1] = --cli-config
+13:19:05.103593   arg[2] = /home/fidel/.arduino15/arduino-cli.yaml
+13:19:05.103615   arg[3] = --log
+13:19:05.103635   arg[4] = info
+13:19:05.103705 arduino-cli found at /usr/local/bin/arduino-cli
+13:19:05.105843 clangd found at /usr/bin/clangd
+13:19:05.105933 logging to /home/fidel/ConstruccionRobotsMoviles/Practicas/Practica06/SurgeEtAmbulaTakeshito/inols.log
+13:19:05.106299 [97mLS: : Initial board configuration: [0m
+13:19:05.106321 [97mLS: : arduino-language-server Version: 0.0.0-git Commit:  Date: [0m
+13:19:05.106354 [97mLS: : Language server temp directory: /tmp/arduino-language-server3341688632[0m
+13:19:05.106373 [97mLS: : Language server build path: /tmp/arduino-language-server3341688632/build[0m
+13:19:05.106387 [97mLS: : Language server build sketch root: /tmp/arduino-language-server3341688632/build/sketch[0m
+13:19:05.106402 [97mLS: : Language server FULL build path: /tmp/arduino-language-server3341688632/fullbuild[0m
+13:19:05.106931 IN Elapsed: 291.647µs
+13:19:05.107316 [92mIDE --> LS REQU initialize 1[0m
+13:19:05.109255 [92m                initialize 1: [93mwrite-locked[0m[0m
+13:19:05.109402 [92m                initialize 1: [93mwrite-unlocked[0m[0m
+13:19:05.109779 [96mINIT --- : initializing workbench: file:///home/fidel/ConstruccionRobotsMoviles/Practicas/Practica06/SurgeEtAmbulaTakeshito[0m
+13:19:05.109875 [96mINIT --- : [93mread-locked[0m[0m
+13:19:05.109908 [96mINIT --- : [93mread-unlocked[0m[0m
+13:19:05.110308 [96mINIT --- : running: --config-file /home/fidel/.arduino15/arduino-cli.yaml compile --fqbn  --only-compilation-database --source-override /tmp/4173744834 --build-path /tmp/arduino-language-server3341688632/fullbuild --format json /home/fidel/ConstruccionRobotsMoviles/Practicas/Practica06/SurgeEtAmbulaTakeshito[0m
+13:19:05.110581 [92m                initialize 1: initialization parameters: {"capabilities":{"textDocumentSync":{"openClose":true,"change":2,"save":{"includeText":true}},"completionProvider":{"triggerCharacters":[".","\u003c","\u003e",":","\"","/"],"allCommitCharacters":[" ","\t","(",")","[","]","{","}","\u003c","\u003e",":",";",",","+","-","/","*","%","^","\u0026","#","?",".","=","\"","'","|"],"completionItem":{}},"hoverProvider":{},"signatureHelpProvider":{"triggerCharacters":["(",","]},"definitionProvider":{},"documentHighlightProvider":{},"documentSymbolProvider":{},"codeActionProvider":{"codeActionKinds":["quickfix","refactor","info"]},"documentFormattingProvider":{},"documentRangeFormattingProvider":{},"documentOnTypeFormattingProvider":{"firstTriggerCharacter":"\n"},"renameProvider":{},"executeCommandProvider":{"commands":["clangd.applyFix","clangd.applyTweak"]},"workspaceSymbolProvider":{}},"serverInfo":{"name":"arduino-language-server","version":"0.0.0-git"}}[0m
+13:19:05.110644 [32mIDE <-- LS RESP initialize 1[0m
+13:19:05.110864 OUT Elapsed: 51.413µs
+13:19:05.228199 IN Elapsed: 117.306269ms
+13:19:05.228540 [92mIDE --> LS NOTIF initialized[0m
+13:19:05.228626 [92m                 initialized: Notification is not propagated to clangd[0m
+13:19:05.228743 IN Elapsed: 93.955µs
+13:19:05.228986 [92mIDE --> LS NOTIF textDocument/didOpen[0m
+13:19:05.229196 [92m                 textDocument/didOpen: [93mwrite-locked[0m[0m
+13:19:05.229222 [92m                 textDocument/didOpen: (throttled: waiting for clangd)[0m
+13:19:05.229240 [92m                 textDocument/didOpen: [93munlocked (waiting clangd)[0m[0m
+13:19:05.723229 [96mINIT --- : error starting clang: running --config-file /home/fidel/.arduino15/arduino-cli.yaml compile --fqbn  --only-compilation-database --source-override /tmp/4173744834 --build-path /tmp/arduino-language-server3341688632/fullbuild --format json /home/fidel/ConstruccionRobotsMoviles/Practicas/Practica06/SurgeEtAmbulaTakeshito: exit status 1[0m
+13:19:05.723314 [92m                 textDocument/didOpen: [93mlocked (waiting clangd)[0m[0m
+13:19:05.723362 [92m                 textDocument/didOpen: clangd startup failed: quitting Language server[0m
